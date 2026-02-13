@@ -110,7 +110,8 @@ export default function ScheduleForm({ onGenerate }: ScheduleFormProps) {
     { value: 3, label: '수' },
     { value: 4, label: '목' },
     { value: 5, label: '금' },
-    { value: 6, label: '토' }
+    { value: 6, label: '토' },
+    { value: 0, label: '일' }
   ];
 
   return (
