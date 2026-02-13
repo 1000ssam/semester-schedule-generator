@@ -1,0 +1,53 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================ */
+/* DESIGN SYSTEM - Detail Page Version */
+/* ============================================================================ */
+
+:root {
+  /* 커스텀 디자인 변수 */
+  --accent: #D2886F;
+  --accent-hover: #C17760;
+  --bg-white: #ffffff;
+  --bg-subtle: #fafafa;
+  --text-main: #171717;
+  --text-sub: #525252;
+  --text-light: #a3a3a3;
+  --border-color: #e5e5e5;
+
+  /* 기존 변수 호환 */
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-white: #0a0a0a;
+    --bg-subtle: #171717;
+    --text-main: #ededed;
+    --text-sub: #a3a3a3;
+    --text-light: #737373;
+    --border-color: #262626;
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: linear-gradient(180deg, var(--bg-white) 0%, var(--bg-subtle) 100%);
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
