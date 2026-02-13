@@ -27,10 +27,10 @@ export default function DataTable({
   return (
     <div className="w-full overflow-auto border border-[#e5e5e5] rounded-lg shadow-sm bg-white">
       <div className="max-h-[500px] overflow-auto">
-        <table className="min-w-full divide-y divide-[#e5e5e5]">
+        <table className="w-full table-fixed divide-y divide-[#e5e5e5]">
           <thead className="bg-[#fafafa] sticky top-0 z-10">
             <tr>
-              <th className="px-3 py-2 w-10 border-r border-[#e5e5e5]">
+              <th className="px-3 py-2 w-12 border-r border-[#e5e5e5]">
                 <div className="flex items-center justify-center">
                   <input
                     type="checkbox"
@@ -65,7 +65,7 @@ export default function DataTable({
                     : 'hover:bg-[#fafafa]'
                 }`}
               >
-                <td className="px-3 py-2 w-10 border-r border-[#e5e5e5]">
+                <td className="px-3 py-2 w-12 border-r border-[#e5e5e5]">
                   <div className="flex items-center justify-center">
                     <input
                       type="checkbox"
