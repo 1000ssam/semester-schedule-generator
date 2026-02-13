@@ -1,13 +1,24 @@
 import { ScheduleRow, ColumnDef } from './types';
 
 /**
- * CSV 값 이스케이프 (표준)
+ * 엑셀이 날짜로 오인하는 숫자-하이픈 패턴 감지
+ * 예: "1-7", "01-07", "3-4-5"
+ */
+const DIGIT_HYPHEN_RE = /^\d+(-\d+)+$/;
+
+/**
+ * CSV 값 이스케이프 (표준 + 숫자보호)
+ * 숫자-하이픈 패턴 앞에 ' 접두사를 붙여 엑셀 날짜 변환 방지
  */
 function escapeCSVValue(value: string): string {
-  if (value.includes(',') || value.includes('"') || value.includes('\n')) {
-    return `"${value.replace(/"/g, '""')}"`;
+  let v = value;
+  if (DIGIT_HYPHEN_RE.test(v)) {
+    v = "'" + v;
   }
-  return value;
+  if (v.includes(',') || v.includes('"') || v.includes('\n')) {
+    return `"${v.replace(/"/g, '""')}"`;
+  }
+  return v;
 }
 
 /**
