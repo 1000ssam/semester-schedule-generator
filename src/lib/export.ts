@@ -74,14 +74,19 @@ export function exportToCSV(
 
 /**
  * TSV 형식으로 변환 (클립보드 복사용)
+ * includeHeader: 첫 묶음에만 헤더를 포함하고 이후 묶음에는 생략할 때 false
  */
-export function convertToTSV(headers: string[], rows: ScheduleRow[]): string {
+export function convertToTSV(
+  headers: string[],
+  rows: ScheduleRow[],
+  includeHeader: boolean = true
+): string {
   const lines: string[] = [];
 
-  // Header
-  lines.push(headers.join('\t'));
+  if (includeHeader) {
+    lines.push(headers.join('\t'));
+  }
 
-  // Data
   rows.forEach(row => {
     const values = headers.map(header => {
       const value = row[header];
