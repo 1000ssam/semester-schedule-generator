@@ -131,7 +131,7 @@ export default function Home() {
               </div>
               <button
                 onClick={handleReset}
-                className="px-3 py-1.5 bg-white border border-[#e5e5e5] text-[#525252] text-xs font-normal rounded-lg hover:border-[#D2886F] hover:text-[#171717] transition-all tracking-tight whitespace-nowrap"
+                className="px-3 py-2 bg-white border border-[#e5e5e5] text-[#525252] text-xs font-normal rounded-lg hover:border-[#D2886F] hover:text-[#171717] transition-all tracking-tight whitespace-nowrap"
               >
                 새 시간표 생성
               </button>

@@ -44,6 +44,20 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* 모바일 가로 스크롤 방지 */
+  overflow-x: hidden;
+}
+
+/* 모바일 터치 타겟 최소 크기 보장 */
+@media (max-width: 640px) {
+  button, a, input[type="checkbox"], select {
+    min-height: 44px;
+  }
+
+  /* 인라인 버튼(삭제 아이콘 등)은 예외 - 별도 패딩 처리 */
+  button.icon-btn {
+    min-height: unset;
+  }
 }
 
 @layer utilities {

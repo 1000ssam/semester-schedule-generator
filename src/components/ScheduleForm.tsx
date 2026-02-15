@@ -116,13 +116,13 @@ export default function ScheduleForm({ onGenerate }: ScheduleFormProps) {
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      <form onSubmit={handleSubmit} className="bg-white border border-[#e5e5e5] rounded-lg shadow-sm p-6">
+      <form onSubmit={handleSubmit} className="bg-white border border-[#e5e5e5] rounded-lg shadow-sm p-4 sm:p-6">
         {/* 학기 기간 */}
         <div className="mb-6">
           <h3 className="text-sm font-normal text-[#171717] tracking-tight mb-2">
             학기 기간
           </h3>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-light text-[#525252] mb-1">
                 시작일
@@ -162,13 +162,13 @@ export default function ScheduleForm({ onGenerate }: ScheduleFormProps) {
                   type="text"
                   value={col.label}
                   onChange={(e) => handleColumnLabelChange(col.id, e.target.value)}
-                  className="w-40 border border-[#e5e5e5] rounded-lg px-3 py-1.5 text-xs font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
+                  className="flex-1 border border-[#e5e5e5] rounded-lg px-3 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
                   placeholder="컬럼 이름"
                 />
                 <button
                   type="button"
                   onClick={() => handleRemoveColumn(col.id)}
-                  className="p-1.5 text-[#a3a3a3] hover:text-red-500 transition-colors"
+                  className="p-2.5 text-[#a3a3a3] hover:text-red-500 transition-colors flex-shrink-0"
                   aria-label="컬럼 삭제"
                 >
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -193,60 +193,80 @@ export default function ScheduleForm({ onGenerate }: ScheduleFormProps) {
             주간 시간표
           </h3>
 
-          {/* 헤더 라벨 행 */}
-          <div className="flex items-center gap-2 mb-1 overflow-x-auto">
-            <span className="w-16 flex-shrink-0 text-xs font-light text-[#a3a3a3] tracking-tight">요일</span>
-            <span className="w-16 flex-shrink-0 text-xs font-light text-[#a3a3a3] tracking-tight">교시</span>
+          {/* 헤더 라벨 행 - 모바일에서도 표시 */}
+          <div className="hidden sm:flex items-center gap-2 mb-1">
+            <span className="w-14 flex-shrink-0 text-xs font-light text-[#a3a3a3] tracking-tight">요일</span>
+            <span className="w-14 flex-shrink-0 text-xs font-light text-[#a3a3a3] tracking-tight">교시</span>
             {columns.map((col) => (
-              <span key={col.id} className="flex-1 min-w-[100px] text-xs font-light text-[#a3a3a3] tracking-tight">
+              <span key={col.id} className="flex-1 min-w-0 text-xs font-light text-[#a3a3a3] tracking-tight truncate">
                 {col.label || '(미지정)'}
               </span>
             ))}
-            {/* 삭제 버튼 자리 */}
-            <span className="w-8 flex-shrink-0" />
+            <span className="w-10 flex-shrink-0" />
           </div>
 
           {/* 항목 행들 */}
           <div className="space-y-2">
             {entries.map((entry) => (
-              <div key={entry.id} className="flex items-center gap-2 overflow-x-auto">
-                <select
-                  value={entry.dayOfWeek}
-                  onChange={(e) => handleEntryChange(entry.id, 'dayOfWeek', Number(e.target.value))}
-                  className="w-16 flex-shrink-0 border border-[#e5e5e5] rounded-lg px-2 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
-                >
-                  {dayOptions.map(option => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+              <div key={entry.id} className="flex flex-col sm:flex-row sm:items-center gap-2 p-2 sm:p-0 bg-[#fafafa] sm:bg-transparent rounded-lg sm:rounded-none border border-[#e5e5e5] sm:border-0">
+                {/* 모바일: 요일+교시를 한 줄에 */}
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1 sm:hidden">
+                    <span className="text-xs text-[#a3a3a3]">요일</span>
+                  </div>
+                  <select
+                    value={entry.dayOfWeek}
+                    onChange={(e) => handleEntryChange(entry.id, 'dayOfWeek', Number(e.target.value))}
+                    className="w-14 flex-shrink-0 border border-[#e5e5e5] rounded-lg px-2 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight bg-white"
+                  >
+                    {dayOptions.map(option => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="flex items-center gap-1 sm:hidden">
+                    <span className="text-xs text-[#a3a3a3]">교시</span>
+                  </div>
+                  <select
+                    value={entry.period}
+                    onChange={(e) => handleEntryChange(entry.id, 'period', Number(e.target.value))}
+                    className="w-14 flex-shrink-0 border border-[#e5e5e5] rounded-lg px-2 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight bg-white"
+                  >
+                    {PERIOD_OPTIONS.map(p => (
+                      <option key={p} value={p}>{p}</option>
+                    ))}
+                  </select>
+                  {/* 모바일: 삭제 버튼을 요일/교시 줄 우측에 */}
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveEntry(entry.id)}
+                    className="ml-auto sm:hidden p-2.5 text-[#a3a3a3] hover:text-red-500 transition-colors"
+                    aria-label="삭제"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
 
-                <select
-                  value={entry.period}
-                  onChange={(e) => handleEntryChange(entry.id, 'period', Number(e.target.value))}
-                  className="w-16 flex-shrink-0 border border-[#e5e5e5] rounded-lg px-2 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
-                >
-                  {PERIOD_OPTIONS.map(p => (
-                    <option key={p} value={p}>{p}</option>
-                  ))}
-                </select>
-
+                {/* 커스텀 필드들 */}
                 {columns.map((col) => (
                   <input
                     key={col.id}
                     type="text"
                     value={entry.customFields[col.id] ?? ''}
                     onChange={(e) => handleCustomFieldChange(entry.id, col.id, e.target.value)}
-                    placeholder={col.label}
-                    className="flex-1 min-w-[100px] border border-[#e5e5e5] rounded-lg px-3 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
+                    placeholder={col.label || '(미지정)'}
+                    className="flex-1 min-w-0 border border-[#e5e5e5] rounded-lg px-3 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight bg-white"
                   />
                 ))}
 
+                {/* 데스크탑: 삭제 버튼 */}
                 <button
                   type="button"
                   onClick={() => handleRemoveEntry(entry.id)}
-                  className="p-2 flex-shrink-0 text-[#a3a3a3] hover:text-red-500 transition-colors"
+                  className="hidden sm:block p-2.5 flex-shrink-0 text-[#a3a3a3] hover:text-red-500 transition-colors"
                   aria-label="삭제"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
