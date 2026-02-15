@@ -112,9 +112,9 @@ export default function Toolbar({ headers, rows, selectedRows, columns }: Toolba
   const isLastChunk = chunkIndex + 1 >= totalChunks;
 
   return (
-    <div className="space-y-2 mb-4">
+    <div className="space-y-2 mb-4 w-full min-w-0">
       {/* 버튼 그룹 */}
-      <div className="flex items-center gap-2 flex-wrap">
+      <div className="flex items-center gap-2 flex-wrap w-full min-w-0">
         {/* 전체 복사/다운로드 */}
         <button
           onClick={handleCopyAll}

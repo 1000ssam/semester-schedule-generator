@@ -118,7 +118,7 @@ export default function Home() {
             </div>
           </div>
         ) : (
-          <>
+          <div className="w-full min-w-0">
             {/* 결과 정보 및 리셋 버튼 */}
             <div className="mb-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 bg-white p-3 rounded-lg shadow-sm border border-[#e5e5e5]">
               <div>
@@ -153,7 +153,7 @@ export default function Home() {
               onRowSelect={handleRowSelect}
               onSelectAll={handleSelectAll}
             />
-          </>
+          </div>
         )}
 
         {/* 푸터 */}

@@ -122,8 +122,8 @@ export default function ScheduleForm({ onGenerate }: ScheduleFormProps) {
           <h3 className="text-sm font-normal text-[#171717] tracking-tight mb-2">
             학기 기간
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 overflow-hidden">
-            <div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="min-w-0">
               <label className="block text-xs font-light text-[#525252] mb-1">
                 시작일
               </label>
@@ -131,11 +131,11 @@ export default function ScheduleForm({ onGenerate }: ScheduleFormProps) {
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="w-full min-w-0 bg-white border border-[#d4d4d4] rounded-lg px-3 py-2.5 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
+                className="w-full bg-white border border-[#d4d4d4] rounded-lg px-3 py-2.5 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
                 required
               />
             </div>
-            <div>
+            <div className="min-w-0">
               <label className="block text-xs font-light text-[#525252] mb-1">
                 종료일
               </label>
@@ -143,7 +143,7 @@ export default function ScheduleForm({ onGenerate }: ScheduleFormProps) {
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="w-full min-w-0 bg-white border border-[#d4d4d4] rounded-lg px-3 py-2.5 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
+                className="w-full bg-white border border-[#d4d4d4] rounded-lg px-3 py-2.5 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
                 required
               />
             </div>
