@@ -207,57 +207,82 @@ export default function ScheduleForm({ onGenerate }: ScheduleFormProps) {
           </div>
 
           {/* 항목 행들 */}
-          <div className="space-y-2">
+          <div className="space-y-2 sm:space-y-2">
             {entries.map((entry) => (
-              <div key={entry.id} className="flex flex-wrap items-center gap-2 p-3 border border-[#e5e5e5] rounded-lg sm:p-0 sm:border-0 sm:rounded-none sm:flex-nowrap">
-                <select
-                  value={entry.dayOfWeek}
-                  onChange={(e) => handleEntryChange(entry.id, 'dayOfWeek', Number(e.target.value))}
-                  className="w-16 flex-shrink-0 border border-[#e5e5e5] rounded-lg px-2 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
-                >
-                  {dayOptions.map(option => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+              <div key={entry.id} className="bg-[#fafafa] rounded-lg p-2.5 space-y-2 sm:bg-transparent sm:p-0 sm:space-y-0 sm:flex sm:items-center sm:gap-2">
+                {/* 첫 줄: 요일 + 교시 + 커스텀필드(모바일 inline) + 삭제 */}
+                <div className="flex items-center gap-2">
+                  <select
+                    value={entry.dayOfWeek}
+                    onChange={(e) => handleEntryChange(entry.id, 'dayOfWeek', Number(e.target.value))}
+                    className="w-16 flex-shrink-0 border border-[#e5e5e5] rounded-lg px-2 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight bg-white"
+                  >
+                    {dayOptions.map(option => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
 
-                <select
-                  value={entry.period}
-                  onChange={(e) => handleEntryChange(entry.id, 'period', Number(e.target.value))}
-                  className="w-16 flex-shrink-0 border border-[#e5e5e5] rounded-lg px-2 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
-                >
-                  {PERIOD_OPTIONS.map(p => (
-                    <option key={p} value={p}>{p}</option>
-                  ))}
-                </select>
+                  <select
+                    value={entry.period}
+                    onChange={(e) => handleEntryChange(entry.id, 'period', Number(e.target.value))}
+                    className="w-16 flex-shrink-0 border border-[#e5e5e5] rounded-lg px-2 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight bg-white"
+                  >
+                    {PERIOD_OPTIONS.map(p => (
+                      <option key={p} value={p}>{p}</option>
+                    ))}
+                  </select>
 
-                {/* 삭제 버튼 - 모바일에서는 첫 줄 오른쪽 끝 */}
-                <button
-                  type="button"
-                  onClick={() => handleRemoveEntry(entry.id)}
-                  className="ml-auto sm:ml-0 sm:order-last p-2 flex-shrink-0 text-[#a3a3a3] hover:text-red-500 transition-colors"
-                  aria-label="삭제"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-
-                {/* 커스텀 필드 - 모바일에서는 전체 너비로 스택 */}
-                {columns.map((col) => (
-                  <div key={col.id} className="w-full sm:w-auto sm:flex-1 sm:min-w-[100px]">
-                    <label className="block text-xs font-light text-[#a3a3a3] mb-1 sm:hidden tracking-tight">
-                      {col.label || '(미지정)'}
-                    </label>
+                  {/* 모바일: 커스텀 필드가 1개면 같은 줄에 표시 */}
+                  {columns.length === 1 && (
                     <input
                       type="text"
-                      value={entry.customFields[col.id] ?? ''}
-                      onChange={(e) => handleCustomFieldChange(entry.id, col.id, e.target.value)}
-                      placeholder={col.label}
-                      className="w-full border border-[#e5e5e5] rounded-lg px-3 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
+                      value={entry.customFields[columns[0].id] ?? ''}
+                      onChange={(e) => handleCustomFieldChange(entry.id, columns[0].id, e.target.value)}
+                      placeholder={columns[0].label}
+                      className="flex-1 min-w-0 border border-[#e5e5e5] rounded-lg px-3 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight bg-white sm:hidden"
                     />
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveEntry(entry.id)}
+                    className="ml-auto sm:ml-0 sm:order-last p-1.5 flex-shrink-0 text-[#a3a3a3] hover:text-red-500 transition-colors"
+                    aria-label="삭제"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* 모바일: 커스텀 필드가 2개 이상이면 아래 줄에 나란히 */}
+                {columns.length >= 2 && (
+                  <div className="flex gap-2 sm:hidden">
+                    {columns.map((col) => (
+                      <input
+                        key={col.id}
+                        type="text"
+                        value={entry.customFields[col.id] ?? ''}
+                        onChange={(e) => handleCustomFieldChange(entry.id, col.id, e.target.value)}
+                        placeholder={col.label}
+                        className="flex-1 min-w-0 border border-[#e5e5e5] rounded-lg px-3 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight bg-white"
+                      />
+                    ))}
                   </div>
+                )}
+
+                {/* 데스크톱: 커스텀 필드 인라인 */}
+                {columns.map((col) => (
+                  <input
+                    key={col.id}
+                    type="text"
+                    value={entry.customFields[col.id] ?? ''}
+                    onChange={(e) => handleCustomFieldChange(entry.id, col.id, e.target.value)}
+                    placeholder={col.label}
+                    className="hidden sm:block flex-1 min-w-[100px] border border-[#e5e5e5] rounded-lg px-3 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
+                  />
                 ))}
               </div>
             ))}
