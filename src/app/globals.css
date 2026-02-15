@@ -59,6 +59,11 @@ input[type="date"] {
   background-color: #ffffff;
   color: var(--text-main);
   position: relative;
+  /* 너비가 부모를 초과하지 않도록 */
+  box-sizing: border-box;
+  max-width: 100%;
+  /* 모바일 자동 zoom 방지: font-size 16px 이상 강제 */
+  font-size: 16px;
 }
 
 /* date input 미입력 상태: placeholder처럼 안내 텍스트 색상 */
@@ -78,6 +83,24 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
   opacity: 1;
+}
+
+/* date input 재설정(✕) 버튼 숨김 - 기능 없이 UI만 차지 */
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
+input[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+/* 모바일 자동 zoom 방지: 모든 input/select의 font-size 16px 이상 강제 */
+@media (max-width: 640px) {
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea {
+    font-size: 16px;
+  }
 }
 
 /* 모바일 터치 타겟 최소 크기 보장 */
