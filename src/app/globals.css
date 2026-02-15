@@ -37,6 +37,12 @@
   }
 }
 
+/* 가로 스크롤 완전 차단 */
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   color: var(--foreground);
   background: linear-gradient(180deg, var(--bg-white) 0%, var(--bg-subtle) 100%);
@@ -44,8 +50,34 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* 모바일 가로 스크롤 방지 */
   overflow-x: hidden;
+  width: 100%;
+}
+
+/* date input 기본 스타일 통일 (모바일에서 회색/불명확 방지) */
+input[type="date"] {
+  background-color: #ffffff;
+  color: var(--text-main);
+  position: relative;
+}
+
+/* date input 미입력 상태: placeholder처럼 안내 텍스트 색상 */
+input[type="date"]:not(:valid) {
+  color: var(--text-light);
+}
+
+/* date input 캘린더 아이콘 - WebKit(모바일 Safari/Chrome) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 2px;
+  /* 아이콘 크기 확대로 터치 용이성 향상 */
+  width: 20px;
+  height: 20px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
 }
 
 /* 모바일 터치 타겟 최소 크기 보장 */

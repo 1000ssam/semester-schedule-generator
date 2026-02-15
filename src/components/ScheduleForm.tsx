@@ -131,7 +131,7 @@ export default function ScheduleForm({ onGenerate }: ScheduleFormProps) {
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="w-full border border-[#e5e5e5] rounded-lg px-3 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
+                className="w-full bg-white border border-[#d4d4d4] rounded-lg px-3 py-2.5 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
                 required
               />
             </div>
@@ -143,7 +143,7 @@ export default function ScheduleForm({ onGenerate }: ScheduleFormProps) {
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="w-full border border-[#e5e5e5] rounded-lg px-3 py-2 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
+                className="w-full bg-white border border-[#d4d4d4] rounded-lg px-3 py-2.5 text-sm font-light text-[#171717] focus:border-[#D2886F] focus:ring-1 focus:ring-[#D2886F] outline-none transition-all tracking-tight"
                 required
               />
             </div>
