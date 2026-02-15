@@ -176,7 +176,7 @@ export default function Toolbar({ headers, rows, selectedRows, columns }: Toolba
           </>
         )}
 
-        <div className="ml-auto text-xs text-[#525252] font-light tracking-tight">
+        <div className="w-full sm:w-auto sm:ml-auto text-xs text-[#525252] font-light tracking-tight">
           총 {rows.length}행
           {hasSelection && <span className="ml-2 text-[#D2886F]">({selectedRows.size}개 선택)</span>}
         </div>
