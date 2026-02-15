@@ -55,8 +55,8 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen py-6 px-4">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen py-6 px-4 overflow-x-hidden">
+      <div className="max-w-7xl mx-auto w-full min-w-0">
         {/* 헤더 - 중앙 정렬 */}
         <div className="mb-6 text-center">
           <div className="inline-flex items-center px-3 py-1 bg-white/50 backdrop-blur-[10px] border border-[#e5e5e5] rounded-full text-xs font-light text-[#525252] mb-3 tracking-tight">
