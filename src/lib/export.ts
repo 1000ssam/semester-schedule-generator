@@ -6,13 +6,16 @@ import { ScheduleRow, ColumnDef } from './types';
  */
 const DIGIT_HYPHEN_RE = /^\d+(-\d+)+$/;
 
+/** YYYY-MM-DD 형식의 실제 날짜는 보호 대상에서 제외 */
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
 /**
  * CSV 값 이스케이프 (표준 + 숫자보호)
  * 숫자-하이픈 패턴 앞에 ' 접두사를 붙여 엑셀 날짜 변환 방지
  */
 function escapeCSVValue(value: string): string {
   let v = value;
-  if (DIGIT_HYPHEN_RE.test(v)) {
+  if (DIGIT_HYPHEN_RE.test(v) && !DATE_RE.test(v)) {
     v = "'" + v;
   }
   if (v.includes(',') || v.includes('"') || v.includes('\n')) {
