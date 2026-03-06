@@ -28,7 +28,7 @@ export function convertToCSV(headers: string[], rows: ScheduleRow[], columns: Co
   const lines: string[] = [];
 
   // Header row
-  lines.push(headers.join(','));
+  lines.push(headers.map(h => escapeCSVValue(h)).join(','));
 
   // Data rows
   rows.forEach(row => {
@@ -54,9 +54,11 @@ export function exportToCSV(
 ) {
   const csv = convertToCSV(headers, rows, columns);
 
-  // BOM for UTF-8
-  const bom = '\uFEFF';
-  const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
+  // UTF-8 BOM + 명시적 UTF-8 인코딩
+  const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+  const encoder = new TextEncoder();
+  const csvBytes = encoder.encode(csv);
+  const blob = new Blob([bom, csvBytes], { type: 'text/csv;charset=utf-8;' });
 
   const link = document.createElement('a');
   const url = URL.createObjectURL(blob);
