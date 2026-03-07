@@ -19,8 +19,8 @@ export const changelog: ChangelogEntry[] = [
         type: 'fixed',
         label: '버그 수정',
         items: [
-          'CSV 다운로드 시 한글이 깨지는 문제 수정 (UTF-8 인코딩 명시 적용)',
-          '날짜값(YYYY-MM-DD)에 불필요한 quote 접두사가 붙는 문제 수정',
+          'CSV 다운로드 시 UTF-8 인코딩을 명시 적용하여 안정성 향상',
+          '날짜값에 quote 접두사가 붙어 스프레드시트 붙여넣기가 안 되던 문제 수정',
         ],
       },
     ],
