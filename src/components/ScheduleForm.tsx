@@ -7,7 +7,7 @@ interface ScheduleFormProps {
   onGenerate: (startDate: string, endDate: string, entries: WeeklyEntry[], columns: ColumnDef[]) => void;
 }
 
-const PERIOD_OPTIONS = [1, 2, 3, 4, 5, 6, 7];
+const PERIOD_OPTIONS = [1, 2, 3, 4, 5, 6, 7, 8];
 
 function createEmptyEntry(columns: ColumnDef[]): WeeklyEntry {
   const customFields: Record<string, string> = {};
