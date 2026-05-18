@@ -42,3 +42,5 @@ next-env.d.ts
 # dev scripts
 cleanup.ps1
 restart.ps1
+
+.vercel
